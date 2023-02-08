@@ -1,0 +1,22 @@
+﻿@if(show)
+{
+    <CallbackOnCssAnimationEnd CssAnimationName="closeDisplayer" OnCssAnimationCompleted="()=>{close=false;show=false;}">
+        <div class='image-displayer @(close?"image-displayer-close":"")' @onclick="()=>close=true">
+                <img src="@URL" class="image-displayer-image" @onclick:stopPropagation="true">
+                <button class="image-displayer-close-button btn-close" @onclick="()=>close=true"></button>
+        </div>
+     </CallbackOnCssAnimationEnd>
+}
+@code {
+
+    [Parameter]
+    public string URL { get; set; } = String.Empty;
+    bool show { get; set; }
+    bool close { get; set; }
+
+    public void Show()
+    {
+        show = true;
+        StateHasChanged();
+    }
+}

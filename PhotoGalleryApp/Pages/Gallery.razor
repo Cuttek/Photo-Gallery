@@ -1,0 +1,48 @@
+﻿@page "/"
+@page "/gallery"
+<PageTitle>Gallery App</PageTitle>
+<div class="sidebar">
+    <Menu GalleryParameters="galleryParameters" changeCallback="ChangeCallback" refreshCallback="RefreshCallback"/>
+</div>
+
+
+<div class="d-flex flex-row flex-wrap align-content-start gallery">
+    @{
+        rnd = new Random(seed);
+    }
+    @for (int i = 0; i < galleryParameters.ImageQuantity; i++)
+    {
+        URL = $"https://source.unsplash.com/random/{rnd.Next(galleryParameters.MinWidth, galleryParameters.MaxWidth)}x{rnd.Next(galleryParameters.MinHeight, galleryParameters.MaxHeight)}/?{galleryParameters.Query}={i}";
+        <InteractivePhoto URL="@URL" ImageClicked="ImageClicked" />
+               
+    }
+</div>
+
+<ImageDisplayer URL="@clickedImageURL" @ref="imageDisplayer" />
+@code {
+    Random rnd;
+    int seed=1;
+    GalleryParameters galleryParameters { get; set; } = new GalleryParameters("kitten", 12, 1000, 2500, 1000, 2500);
+
+    string URL = String.Empty;
+    ImageDisplayer? imageDisplayer = new ImageDisplayer();
+    string clickedImageURL = String.Empty;
+    public void ImageClicked(string url)
+    {
+        clickedImageURL = url;
+        if (imageDisplayer != null)
+        {
+            imageDisplayer.Show();
+        }
+    }
+    public void ChangeCallback(GalleryParameters gp)
+    {
+        galleryParameters = gp;
+    }
+    public void RefreshCallback()
+    {
+        seed = DateTime.Now.Millisecond;
+        StateHasChanged();
+    }
+
+}

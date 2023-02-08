@@ -1,0 +1,11 @@
+﻿@if(URL!=String.Empty)
+{
+    <img class="rounded-3 m-1 justify-content-between gallery-image" src="@URL" @onclick="()=>ImageClicked.InvokeAsync(URL)">
+}
+
+@code {
+    [Parameter]
+    public string URL { get; set; } = String.Empty;
+    [Parameter]
+    public EventCallback<string> ImageClicked { get; set; }
+}
