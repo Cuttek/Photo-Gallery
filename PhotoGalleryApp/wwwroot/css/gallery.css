@@ -26,9 +26,22 @@
         height: 100vh;
     }
 }*/
-    .gallery {
-        justify-content: space-around;
-    }
+*{
+    font-weight:bold;
+}
+.content {
+    flex-grow: 1;
+    display:flex;
+    min-height:100vh;
+    flex-direction:column;
+}
+
+.gallery {
+    justify-content: space-around;
+    margin-left: .5em;
+    margin-right: .5em;
+    flex:1 1 auto;
+}
 
     .gallery-image {
         max-height: 20vmax;
@@ -38,6 +51,8 @@
         user-select: none;
         vertical-align: bottom;
         object-fit: cover;
+
+
     }
 
     .gallery::after {
@@ -81,8 +96,9 @@
         right: 2em;
         top: 1em;
         z-index: 2;
-        background-color:rgba(10,10,10,0.2);
+        background-color:rgba(255,255,255,.9);
         border:solid white 1px;
+        border-radius:50%;
 
     }
 
@@ -131,9 +147,11 @@
 .parameters {
     display: flex;
     flex-direction:column;
+
 }
 form {
     flex: 1 1 auto;
+
 }
     .menu form {
         display: flex;
@@ -229,10 +247,11 @@ main {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-.menu {
+/*.menu {*/
     /*min-height: 3.5rem;*/
-    background-color: rgba(0,0,0,0.4);
-}
+    /*background-color: rgba(0,0,0,0.4);
+
+}*/
 
 .navbar-brand {
     font-size: 1.1rem;
@@ -262,12 +281,41 @@ main {
             color: white;
         }
 
-
+.footer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background: rgb(5, 39, 103);
+    color: white;
+    margin: 0;
+    border-top: solid 1px lightgrey;
+}
+    .footer > p {
+           margin:0;
+           padding:1em;
+           padding-right:1.5em;
+           font-size:12px;
+    }
+.footer > p > a
+{
+    text-decoration:none;
+    font-weight:900;
+    color:white;
+}
+.social-logo{
+    width:auto;
+    height:3em;
+}
 @media (min-width: 900px) {
     .navbar-toggler {
         display: none;
     }
+    .container-fluid
+    {
+        justify-content:center!important;
 
+    }
     .collapse {
         /*Never collapse the sidebar for wide screens */
         display: block!important;
@@ -285,4 +333,9 @@ main {
             flex-direction: column;
            
         }
+}
+.btn
+{
+    box-shadow: none!important;
+    outline: 0;
 }

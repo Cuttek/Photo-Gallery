@@ -3,9 +3,9 @@
 }
 <div class="menu">
 
-    <div class=" navbar navbar-dark">
+    <div class="navbar navbar-dark">
         <div class="container-fluid">
-            <h4 class="text-nowrap p-3 m-0"><span class="oi oi-image" aria-hidden="true"></span> Photo Gallery</h4>
+            <h4 class="text-nowrap p-3 m-0 text-center"><span class="oi oi-image" aria-hidden="true"></span> Photo Gallery</h4>
             <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -41,13 +41,13 @@
                 </div>
             </div>
             <div class="nav-item d-flex flex-row flex-nowrap">
-                <button type="submit" class="btn btn-primary m-1" @onclick="Change">Change</button>
-                <button type="submit" class="btn btn-secondary m-1" @onclick="Refresh">Refresh</button>
+                <button type="submit" class="btn btn-primary m-1 text-nowrap" @onclick="Change">Save Changes</button>
+                <button type="submit" class="btn btn-secondary m-1 text-nowrap" @onclick="Refresh">New Results</button>
             </div>
         </EditForm>
-
+        
     </div>
-
+    
 
 
 
@@ -70,6 +70,7 @@
 
     void Change()
     {
+        gp.ImageQuantity = Math.Clamp(gp.ImageQuantity, 0, 999);
         gp.MinWidth = Math.Clamp(gp.MinWidth, 100, 9999);
         gp.MinHeight = Math.Clamp(gp.MinHeight, 100, 9999);
         gp.MaxWidth = Math.Clamp(gp.MaxWidth, gp.MinWidth, 9999);
