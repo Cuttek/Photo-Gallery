@@ -9,11 +9,12 @@
 <div class="content">
     <div class="d-flex flex-row flex-wrap align-content-start gallery">
         @{
-            rnd = new Random(seed);
+            ImageParameters.SetSeed(seed);
         }
         @for (int i = 0; i < galleryParameters.ImageQuantity; i++)
         {
-            URL = $"https://source.unsplash.com/random/{rnd.Next(galleryParameters.MinWidth, galleryParameters.MaxWidth)}x{rnd.Next(galleryParameters.MinHeight, galleryParameters.MaxHeight)}/?{galleryParameters.Query}={i}";
+            imageParameters = ImageParameters.RequestImageParameters(galleryParameters.Resolution, galleryParameters.Orientation);
+            URL = $"https://source.unsplash.com/random/{imageParameters.Width}x{imageParameters.Height}/?{galleryParameters.Query}={i}";
             <InteractivePhoto URL="@URL" ImageClicked="ImageClicked" />
 
         }
@@ -25,10 +26,9 @@
 
 <ImageDisplayer URL="@clickedImageURL" @ref="imageDisplayer" />
 @code {
-    Random rnd;
     int seed = 1;
-    GalleryParameters galleryParameters { get; set; } = new GalleryParameters("kitten", 12, 300, 600, 300, 600);
-
+    GalleryParameters galleryParameters { get; set; } = new GalleryParameters("Kitten", 12, "Low", "Landscapes");
+    ImageParameters imageParameters= new ImageParameters();
     string URL = String.Empty;
     ImageDisplayer? imageDisplayer = new ImageDisplayer();
     string clickedImageURL = String.Empty;

@@ -103,15 +103,14 @@ a, .btn-link {
     border-radius: 0.4em;
     text-align: center;
 }
-.inputNumber {
+.inputText, .inputNumber,.inputSelect{
     width:12em;
-}
-.inputText{
-    width:12em;
+    height:2em;
 }
 .inputNumberRange {
     width: 6em;
 }
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

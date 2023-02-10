@@ -26,28 +26,49 @@
                 </div>
 
                 <div class="nav-item form-group d-flex flex-column align-items-center">
-                    <div class="m-1 text-nowrap">Width Pixel Range:</div>
+                    @*<div class="m-1 text-nowrap">Width Pixel Range:</div>
                     <div class="d-flex flex-row">
-                        <InputNumber id="MinWidth" class="input inputNumberRange m-1" @bind-Value="gp.MinWidth" min="100" max="9999"/>
-                        <InputNumber id="MaxWidth" class="input inputNumberRange m-1" @bind-Value="gp.MaxWidth" min="100" max="9999" />
-                    </div>
+                    <InputNumber id="MinWidth" class="input inputNumberRange m-1" @bind-Value="gp.MinWidth" min="100" max="9999"/>
+                    <InputNumber id="MaxWidth" class="input inputNumberRange m-1" @bind-Value="gp.MaxWidth" min="100" max="9999" />
+                    </div>*@
+                    <label class="m-1" for="Resolution">Resolution:</label>
+                    <InputSelect class="input inputSelect" id="Resolution" @bind-Value="@gp.Resolution">
+                        @foreach (var resolution in resolutions)
+                        {
+                            <option value="@resolution">@resolution</option>
+
+                        }
+
+
+                    </InputSelect>
                 </div>
                 <div class="nav-item form-group d-flex flex-column align-items-center">
-                    <div class="m-1 text-nowrap">Height Pixel Range:</div>
-                    <div class="d-flex flex-row">
-                        <InputNumber id="MinHeight" class="input inputNumberRange m-1" @bind-Value="gp.MinHeight" min="100" max="9999" />
-                        <InputNumber id="MaxHeight" class="input inputNumberRange m-1" @bind-Value="gp.MaxHeight" min="100" max="9999" />
-                    </div>
+                    <label class="m-1" for="Orientation">Orientation:</label>
+                    <InputSelect class="input inputSelect" id="Orientation" @bind-Value="@gp.Orientation">
+                        @foreach (var orientation in orientations)
+                        {
+                            <option value="@orientation">@orientation</option>
+
+
+                        }
+                    </InputSelect>
                 </div>
+                @* <div class="nav-item form-group d-flex flex-column align-items-center">
+                <div class="m-1 text-nowrap">Height Pixel Range:</div>
+                <div class="d-flex flex-row">
+                <InputNumber id="MinHeight" class="input inputNumberRange m-1" @bind-Value="gp.MinHeight" min="100" max="9999" />
+                <InputNumber id="MaxHeight" class="input inputNumberRange m-1" @bind-Value="gp.MaxHeight" min="100" max="9999" />
+                </div>
+                </div>*@
             </div>
             <div class="nav-item d-flex flex-row flex-nowrap">
                 <button type="submit" class="btn btn-primary m-1 text-nowrap" @onclick="Change">Save Changes</button>
                 <button type="submit" class="btn btn-secondary m-1 text-nowrap" @onclick="Refresh">New Results</button>
             </div>
         </EditForm>
-        
+
     </div>
-    
+
 
 
 
@@ -58,23 +79,23 @@
 </div>
 
 @code {
-
     [Parameter]
-    public GalleryParameters GalleryParameters { get; set; }
+    public GalleryParameters GalleryParameters { get; set; } = new GalleryParameters();
     [Parameter]
     public EventCallback<GalleryParameters> changeCallback { get; set; }
     [Parameter]
     public EventCallback refreshCallback { get; set; }
-
-    GalleryParameters gp;
+    List<string> resolutions = new List<string> { "Low", "Medium", "High" };
+    List<string> orientations = new List<string> { "Landscapes", "Portraits", "Squares", "All" };
+    GalleryParameters gp=new GalleryParameters();
 
     void Change()
     {
         gp.ImageQuantity = Math.Clamp(gp.ImageQuantity, 0, 999);
-        gp.MinWidth = Math.Clamp(gp.MinWidth, 100, 9999);
-        gp.MinHeight = Math.Clamp(gp.MinHeight, 100, 9999);
-        gp.MaxWidth = Math.Clamp(gp.MaxWidth, gp.MinWidth, 9999);
-        gp.MaxHeight = Math.Clamp(gp.MaxHeight, gp.MinHeight, 9999);
+        //gp.MinWidth = Math.Clamp(gp.MinWidth, 100, 9999);
+        //gp.MinHeight = Math.Clamp(gp.MinHeight, 100, 9999);
+        //gp.MaxWidth = Math.Clamp(gp.MaxWidth, gp.MinWidth, 9999);
+        //gp.MaxHeight = Math.Clamp(gp.MaxHeight, gp.MinHeight, 9999);
         changeCallback.InvokeAsync(gp);
     }
     void Refresh()

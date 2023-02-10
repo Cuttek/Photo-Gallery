@@ -4,22 +4,26 @@ namespace PhotoGalleryApp.Data
 {
     public class GalleryParameters
     {
-        public GalleryParameters() { }
-        public GalleryParameters(string query, int imageQuantity, int minWidth, int maxWidth, int minHeight, int maxHeight)
+        
+        public GalleryParameters() 
+        { 
+            Query = String.Empty;
+            ImageQuantity = 0;
+            Resolution=String.Empty;
+            Orientation= String.Empty;
+        }
+        public GalleryParameters(string query, int imageQuantity,string resolution, string orientation)
         {
             Query = query;
             ImageQuantity = imageQuantity;
-            MinWidth = minWidth;
-            MaxWidth = maxWidth;
-            MinHeight = minHeight;
-            MaxHeight = maxHeight;
+            Resolution = resolution;
+            Orientation = orientation;
         }
         public string Query { get; set; }        
         public int ImageQuantity { get; set; }
-        public int MinWidth { get; set; }
-        public int MaxWidth { get; set; }
-        public int MinHeight { get; set; }
-        public int MaxHeight { get; set; }
         
+        public string Resolution { get; set; }
+        public string Orientation { get; set; }
+       
     }
 }
